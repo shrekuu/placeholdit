@@ -15,5 +15,4 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/{dimension}', 'ImageController@getImageWithoutKey');
-Route::get('/{dimension}/{key}', 'ImageController@getImage');
+Route::get('/{dimension}/{key?}', 'ImageController@getImage');

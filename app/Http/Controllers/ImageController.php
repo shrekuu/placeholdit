@@ -11,18 +11,9 @@ class ImageController extends Controller
 {
     protected $errorMsg = '服务器出错';
 
-    // get image without key
-    public function getImageWithoutKey(Request $request, $dimension)
-    {
-        return $this->getImage($request, $dimension, 1);
-    }
-
     // get image
-    public function getImage(Request $request, $dimension, $key)
+    public function getImage(Request $request, $dimension, $key = 1)
     {
-        if (!$key) {
-            $key = 1;
-        }
         $file = $this->retrieveFile($dimension, $key);
         if (!$file) {
             return response($this->errorMsg, 500);
