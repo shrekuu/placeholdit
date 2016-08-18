@@ -3,42 +3,23 @@
     <head>
         <title>Laravel</title>
 
-        <link href="https://fonts.googleapis.com/css?family=Lato:100" rel="stylesheet" type="text/css">
-
         <style>
-            html, body {
-                height: 100%;
+            * {
+                font-family: Arial, "PingFang SC", 'Microsoft Yahei', sans-serif;
             }
-
-            body {
-                margin: 0;
-                padding: 0;
-                width: 100%;
-                display: table;
-                font-weight: 100;
-                font-family: 'Lato', sans-serif;
-            }
-
             .container {
-                text-align: center;
-                display: table-cell;
-                vertical-align: middle;
-            }
-
-            .content {
-                text-align: center;
-                display: inline-block;
-            }
-
-            .title {
-                font-size: 96px;
+                width: 300px;
+                margin: 50px auto;
+                color: #444;
             }
         </style>
     </head>
     <body>
         <div class="container">
             <div class="content">
-                <div class="title">Laravel 5</div>
+                <p>举例: {{ config('app.url')  }}/300x200/1</p>
+                <p>"300x200" 为宽高</p>
+                <p>"1" 为使图片唯一的 key</p>
             </div>
         </div>
     </body>
