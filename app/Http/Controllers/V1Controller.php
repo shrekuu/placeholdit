@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use GuzzleHttp\Client;
-use App\Models\v1 as Image;
+use App\Models\V1 as Image;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
