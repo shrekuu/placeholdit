@@ -7,7 +7,6 @@ use App\Models\V1 as Image;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
-use Illuminate\Support\Facades\File;
 
 class V1Controller extends Controller
 {
@@ -29,8 +28,6 @@ class V1Controller extends Controller
             'dimension.regex' => 'dimension 格式不正确, 正确格式为图片宽像素 + 小写字母 x + 高, 如: 300x200',
             'key.integer'        => 'key 应为一个整数',
         ]);
-
-        dd('hi');
 
         if ($validator->fails()) {
             return response($validator->errors(), 400);
