@@ -38,6 +38,7 @@ class InitDb extends Migration
      */
     public function down()
     {
-        Schema::drop('images');
+        Schema::drop('v1');
+        Schema::drop('v2');
     }
 }
