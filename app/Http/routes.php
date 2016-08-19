@@ -15,6 +15,6 @@ Route::get('/', function () {
     return view('index');
 });
 
-Route::get('/v1', 'v1Controller@getImage');
+Route::get('/v1', 'V1Controller@getImage');
 
-Route::get('/v2', 'v2Controller@getImage');
+Route::get('/v2', 'V2Controller@getImage');
