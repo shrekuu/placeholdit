@@ -13,12 +13,20 @@ class InitDb extends Migration
      */
     public function up()
     {
-        Schema::create('images', function (Blueprint $table) {
-           //  $table->string('filename')->index();
+        Schema::create('v1', function (Blueprint $table) {
             $table->increments('id');
             $table->string('dimension');
             $table->string('hash')->index();
             $table->unsignedInteger('key');
+            $table->timestamps();
+        });
+
+        Schema::create('v2', function (Blueprint $table) {
+            $table->increments('id');
+            $table->string('category');
+            $table->string('dimension');
+            $table->unsignedInteger('key');
+            $table->string('hash')->index();
             $table->timestamps();
         });
     }

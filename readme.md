@@ -1,27 +1,23 @@
-# Laravel PHP Framework
+# 基本图床务器
 
-[![Build Status](https://travis-ci.org/laravel/framework.svg)](https://travis-ci.org/laravel/framework)
-[![Total Downloads](https://poser.pugx.org/laravel/framework/d/total.svg)](https://packagist.org/packages/laravel/framework)
-[![Latest Stable Version](https://poser.pugx.org/laravel/framework/v/stable.svg)](https://packagist.org/packages/laravel/framework)
-[![Latest Unstable Version](https://poser.pugx.org/laravel/framework/v/unstable.svg)](https://packagist.org/packages/laravel/framework)
-[![License](https://poser.pugx.org/laravel/framework/license.svg)](https://packagist.org/packages/laravel/framework)
+## 用法
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable, creative experience to be truly fulfilling. Laravel attempts to take the pain out of development by easing common tasks used in the majority of web projects, such as authentication, routing, sessions, queueing, and caching.
+* 参数: dimension(长宽, 必选, 字符串, 如: "300x200")
+* 参数: key(标识键, 可选, 整数, 默认为 "1")
+* 示例 url: http://placeholdit.thexrverge.com/?dimension=300x200
+* 示例 url: http://placeholdit.thexrverge.com/?dimension=300x200&key=2
+* 更多参考: http://placehold.it/
 
-Laravel is accessible, yet powerful, providing tools needed for large, robust applications. A superb inversion of control container, expressive migration system, and tightly integrated unit testing support give you the tools you need to build any application with which you are tasked.
+---
 
-## Official Documentation
+# 高级图床服务器
 
-Documentation for the framework can be found on the [Laravel website](http://laravel.com/docs).
+## 用法
 
-## Contributing
-
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](http://laravel.com/docs/contributions).
-
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell at taylor@laravel.com. All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](http://opensource.org/licenses/MIT).
+* 参数: dimension(长宽, 必选, 字符串, 如: "300x200")
+* 参数: category(分类, 可选, 字符串, 默认为 "people")
+* 参数: key(标识键, 可选, 整数, 默认为 "1")
+* 示例 url: http://placeholdit.thexrverge.com/?dimension=300x200
+* 示例 url: http://placeholdit.thexrverge.com/?dimension=300x200&key=2
+* 示例 url: http://placeholdit.thexrverge.com/?dimension=300x200&key=3&category=cat
+* 更多参考: http://lorempixel.com/

@@ -11,8 +11,10 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+//Route::get('/', function () {
+//    return view('welcome');
+//});
 
-Route::get('/{dimension}/{key?}', 'ImageController@getImage');
+Route::get('/v1', 'v1Controller@getImage');
+
+Route::get('/v2', 'v2Controller@getImage');
