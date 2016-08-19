@@ -6,7 +6,7 @@
 * 参数: key(标识键, 可选, 整数, 默认为 "1")
 * 示例 url: http://placeholdit.thexrverge.com/?dimension=300x200
 * 示例 url: http://placeholdit.thexrverge.com/?dimension=300x200&key=2
-* 更多参考: http://placehold.it/
+* 了解更多: http://placehold.it/
 
 ---
 
@@ -20,4 +20,4 @@
 * 示例 url: http://placeholdit.thexrverge.com/?dimension=300x200
 * 示例 url: http://placeholdit.thexrverge.com/?dimension=300x200&key=2
 * 示例 url: http://placeholdit.thexrverge.com/?dimension=300x200&key=3&category=cat
-* 更多参考: http://lorempixel.com/
+* 了解更多: http://lorempixel.com/
