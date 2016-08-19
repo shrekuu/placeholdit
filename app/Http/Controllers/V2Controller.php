@@ -29,6 +29,7 @@ class V2Controller extends Controller
         ], [
             'dimension.required' => 'dimension 缺失参数, 如: 300x200',
             'key.integer'        => 'key 应为一个整数',
+            'category.in'        => '分类必须存在于 abstract,animals,business,cats,city,food,nightlife,fashion,people,nature,sports,transport,technics',
         ]);
 
         if ($validator->fails()) {
