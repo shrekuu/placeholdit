@@ -22,12 +22,15 @@ class V1Controller extends Controller
         set_time_limit(1000);
 
         $validator = validator($request->all(), [
-            'dimension' => 'required',
+            'dimension' => 'required|regex:/^\d+x\d+$/',
             'key'       => 'integer',
         ], [
             'dimension.required' => 'dimension 缺失参数, 如: 300x200',
+            'dimension.regex' => 'dimension 格式不正确, 正确格式为图片宽像素 + 小写字母 x + 高, 如: 300x200',
             'key.integer'        => 'key 应为一个整数',
         ]);
+
+        dd('hi');
 
         if ($validator->fails()) {
             return response($validator->errors(), 400);
