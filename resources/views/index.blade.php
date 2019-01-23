@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>蓝石创想 | 图床</title>
+    <title>占位图 | 温柔的码农</title>
     <link rel="stylesheet" href="/vendor/css/github-markdown.css">
     <style>
         body {
