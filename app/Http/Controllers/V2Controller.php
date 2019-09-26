@@ -163,7 +163,8 @@ class V2Controller extends Controller
     {
         list($w, $h) = explode('x', $this->dimension);
         $category = $this->category;
+        $key = $this->key;
 
-        return "http://lorempixel.com/$w/$h/$category";
+        return "http://lorempixel.com/$w/$h/$category/$key";
     }
 }
