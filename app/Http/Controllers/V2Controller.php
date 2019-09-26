@@ -165,6 +165,6 @@ class V2Controller extends Controller
         $category = $this->category;
         $key = $this->key;
 
-        return "http://lorempixel.com/$w/$h/$category/$key";
+        return "http://lorempixel.com/$w/$h/$category/k$key";
     }
 }
