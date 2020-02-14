@@ -157,18 +157,14 @@ class V1Controller extends Controller
      * @param $key
      * @return string
      *
-     * example url: https://placeholdit.imgix.net/~text?txtsize=72&txt=350x150&w=350&h=150
+     * example url: https://via.placeholder.com/468x60?text=hahah
      *
      */
     private function generateRemoteImageUrl()
     {
-        $dimension = $this->dimension;
-        list($w, $h) = explode('x', $dimension);
-        $min = $w > $h ? $h : $w;
-        $textSize = ($min / 5) > 10 ? $min / 5 : 10;
-
+        list($w, $h) = explode('x', $this->dimension);
         $key = $this->key;
 
-        return "https://placeholdit.imgix.net/~text?txtsize=$textSize&txt=$key:$dimension&w=$w&h=$h";
+        return "https://via.placeholder.com/{$w}x{$h}?text=$key";
     }
 }

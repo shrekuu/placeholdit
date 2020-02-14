@@ -8,7 +8,7 @@
 * 参数: key(标识键, 可选, 整数, 默认为 "1"), 固定取某一张图片时使用
 * 示例 url: http://placeholdit.projects.linwise.com/v1?dimension=300x200
 * 示例 url: http://placeholdit.projects.linwise.com/v1?dimension=300x200&key=2
-* 了解更多: http://placehold.it/
+* 了解更多: http://placeholder.com
 
 ---
 
