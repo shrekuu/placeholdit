@@ -30,7 +30,9 @@ class V1Controller extends Controller
         ]);
 
         if ($validator->fails()) {
-            return response($validator->errors(), 400);
+            return view('errors.400', [
+                'errors' => $validator->errors()
+            ]);
         }
 
         $this->dimension = $request->dimension;
