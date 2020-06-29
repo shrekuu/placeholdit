@@ -30,9 +30,9 @@ class V1Controller extends Controller
         ]);
 
         if ($validator->fails()) {
-            return view('errors.400', [
+            return response()->view('errors.custom', [
                 'errors' => $validator->errors()
-            ]);
+            ], 400);
         }
 
         $this->dimension = $request->dimension;
@@ -41,8 +41,11 @@ class V1Controller extends Controller
         $file = $this->retrieveFile();
 
         if (!$file) {
-            return response($this->errorMsg, 500);
+            return response()->view('errors.custom', [
+                'errMsg' => $this->errorMsg
+            ], 500);
         }
+        
         return response()->file($file);
     }
 
