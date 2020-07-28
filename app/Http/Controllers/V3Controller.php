@@ -163,7 +163,8 @@ class V3Controller extends Controller
     {
         list($w, $h) = explode('x', $this->dimension);
         $category = $this->category;
+        $key = $this->key;
 
-        return "https://placem.at/$category?w=$w&h=$h";
+        return "https://placem.at/$category?w=$w&h=$h&random=$key";
     }
 }
