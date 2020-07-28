@@ -119,9 +119,7 @@ class V3Controller extends Controller
      */
     public function curlImage($tempFilePath, $url)
     {
-        $client = new Client();
-
-        $client->setUserAgent($this->userAgents[array_rand($this->userAgents)]);
+        $client = new Client(['headers' => ['User-Agent' => $this->userAgents[array_rand($this->userAgents)]]]);
 
         try {
             $resource = fopen($tempFilePath, 'w');

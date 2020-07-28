@@ -31,7 +31,7 @@
 * 参数: key(标识键, 可选, 整数, 默认为 "1"), 固定取某一张图片时使用
 * 示例 url: <a href="http://placeholdit.projects.linwise.com/v2?dimension=300x300" target="_blank">http://placeholdit.projects.linwise.com/v2?dimension=300x300</a>
 * 示例 url: <a href="http://placeholdit.projects.linwise.com/v2?dimension=300x200&key=2" target="_blank">http://placeholdit.projects.linwise.com/v2?dimension=300x200&key=2</a>
-* 示例 url: <a href="http://placeholdit.projects.linwise.com/v2?dimension=300x200&key=3&category=things" target="_blank">http://placeholdit.projects.linwise.com/v2?dimension=300x200&key=3&category=things</a>
+* 示例 url: <a href="http://placeholdit.projects.linwise.com/v2?dimension=300x200&key=3&category=city" target="_blank">http://placeholdit.projects.linwise.com/v2?dimension=300x200&key=3&category=city</a>
 * 图片来自: <a href="http://lorempixel.com" target="_blank">http://lorempixel.com</a>
 
 
