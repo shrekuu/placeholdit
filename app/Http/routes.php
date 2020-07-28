@@ -18,3 +18,5 @@ Route::get('/', function () {
 Route::get('/v1', 'V1Controller@getImage');
 
 Route::get('/v2', 'V2Controller@getImage');
+
+Route::get('/v3', 'V3Controller@getImage');

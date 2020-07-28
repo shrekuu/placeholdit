@@ -1,10 +1,9 @@
 <?php
 
-use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class InitDb extends Migration
+class CreateV3Table extends Migration
 {
     /**
      * Run the migrations.
@@ -13,15 +12,7 @@ class InitDb extends Migration
      */
     public function up()
     {
-        Schema::create('v1', function (Blueprint $table) {
-            $table->increments('id');
-            $table->string('dimension');
-            $table->string('hash')->index();
-            $table->unsignedInteger('key');
-            $table->timestamps();
-        });
-
-        Schema::create('v2', function (Blueprint $table) {
+        Schema::create('v3', function (Blueprint $table) {
             $table->increments('id');
             $table->string('category');
             $table->string('dimension');
@@ -38,7 +29,6 @@ class InitDb extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('v1');
-        Schema::dropIfExists('v2');
+        Schema::dropIfExists('v3');
     }
 }

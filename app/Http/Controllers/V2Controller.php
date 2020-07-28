@@ -41,6 +41,10 @@ class V2Controller extends Controller
         $this->dimension = $request->dimension;
         $this->key = $request->key ? $request->key : 1;
 
+        $this->category = $request->input('category', 'people');
+        $this->dimension = $request->input('dimension');
+        $this->key = $request->input('key', 1);
+
         $file = $this->retrieveFile();
 
         if (!$file) {

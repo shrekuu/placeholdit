@@ -3,15 +3,17 @@
 namespace App\Http\Controllers;
 
 use GuzzleHttp\Client;
-use App\Models\V1 as Image;
+use App\Models\V3 as Image;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
+use Illuminate\Support\Facades\File;
 
-class V1Controller extends Controller
+class V3Controller extends Controller
 {
     protected $errorMsg = '服务器出错';
 
+    protected $category;
     protected $dimension;
     protected $key;
 
@@ -23,29 +25,27 @@ class V1Controller extends Controller
         $validator = validator($request->all(), [
             'dimension' => 'required|regex:/^\d+x\d+$/',
             'key'       => 'integer',
+            'category'  => 'in:people,places,things',
         ], [
             'dimension.required' => 'dimension 缺失参数, 如: 300x200',
             'dimension.regex' => 'dimension 格式不正确, 正确格式为图片宽像素 + 小写字母 x + 高, 如: 300x200',
             'key.integer'        => 'key 应为一个整数',
+            'category.in'        => '分类必须存在于 people,places,things',
         ]);
 
         if ($validator->fails()) {
-            return response()->view('errors.custom', [
-                'errors' => $validator->errors()
-            ], 400);
+            return response($validator->errors(), 400);
         }
 
-        $this->dimension = $request->input('dimension');
+        $this->category = $request->input('category', 'places');
+        $this->dimension = $request->input('dimension', '300x300');
         $this->key = $request->input('key', 1);
 
         $file = $this->retrieveFile();
 
         if (!$file) {
-            return response()->view('errors.custom', [
-                'errMsg' => $this->errorMsg
-            ], 500);
+            return response($this->errorMsg, 500);
         }
-        
         return response()->file($file);
     }
 
@@ -54,9 +54,10 @@ class V1Controller extends Controller
         $image = Image::where([
             'dimension' => $this->dimension,
             'key'       => $this->key,
+            'category'  => $this->category,
         ])->first();
 
-        $dir = public_path() . '/upload/v1';
+        $dir = public_path() . '/upload/v3';
 
         if (!is_dir($dir)) {
             @mkdir($dir, 0777, true);
@@ -78,23 +79,32 @@ class V1Controller extends Controller
             // delete db record
             !!$image && $image->delete();
 
-            $hash = $this->getUniqueFilename();
+            $randomStr = md5(uniqid(empty($_SERVER['SERVER_ADDR']) ? '' : $_SERVER['SERVER_ADDR'], true));
 
-            $filePath = $dir . '/' . $hash . '.jpg';
+            if (substr(sys_get_temp_dir(), -1, 1) == '/') {
+                $tempFilePath = sys_get_temp_dir() . $randomStr . '.jpg';
+            } else {
+                $tempFilePath = sys_get_temp_dir() . '/' . $randomStr . '.jpg';
+            }
 
             $url = $this->generateRemoteImageUrl();
 
-            $hash = $this->curlImage($filePath, $url, $hash);
+            $hash = $this->curlImage($tempFilePath, $url);
 
             if (!$hash) {
                 return false;
             }
 
-            Image::create([
+            $image = Image::create([
+                'category'  => $this->category,
                 'dimension' => $this->dimension,
                 'hash'      => $hash,
                 'key'       => $this->key,
             ]);
+
+            $filePath = $dir . '/' . $image->hash . '.jpg';
+
+            File::move($tempFilePath, $filePath);
         }
 
         return $filePath;
@@ -107,14 +117,14 @@ class V1Controller extends Controller
      *
      * @example '/path/to/dir/13b73edae8443990be1aa8f1a483bc27.jpg'
      */
-    public function curlImage($filePath, $url, $hash)
+    public function curlImage($tempFilePath, $url)
     {
         $client = new Client();
 
         $res = null;
 
         try {
-            $resource = fopen($filePath, 'w');
+            $resource = fopen($tempFilePath, 'w');
             $res = $client->get($url, [
                 'sink' => $resource,
             ]);
@@ -124,35 +134,19 @@ class V1Controller extends Controller
                 dd($e);
             }
 
-            $this->errorMsg = '图片获取失败, placehold.it 服务器不可用';
+            $this->errorMsg = '图片获取失败, https://placem.at 服务器不可用';
             return false;
         }
+
+        $hash = md5_file($tempFilePath);
 
         $found = Image::where('hash', $hash)->exists();
 
         if ($found) {
-            return $this->curlImage($filePath, $url, $hash);
+            return $this->curlImage($tempFilePath, $url);
         }
 
         return $hash;
-    }
-
-    /**
-     * get unique filename
-     *
-     * @param $key
-     * @return string
-     */
-    private function getUniqueFilename()
-    {
-        $hash = md5(uniqid(empty($_SERVER['SERVER_ADDR']) ? '' : $_SERVER['SERVER_ADDR'], true));
-        $found = Image::where('hash', $hash)->first();
-
-        if (!$found) {
-            return $hash;
-        }
-
-        return $this->getUniqueFilename();
     }
 
     /**
@@ -162,14 +156,14 @@ class V1Controller extends Controller
      * @param $key
      * @return string
      *
-     * example url: https://via.placeholder.com/468x60?text=hahah
+     * example url: http://lorempixel.com/300/200/cats
      *
      */
     private function generateRemoteImageUrl()
     {
         list($w, $h) = explode('x', $this->dimension);
-        $key = $this->key;
+        $category = $this->category;
 
-        return "https://via.placeholder.com/{$w}x{$h}?text=$key";
+        return "https://placem.at/$category?w=$w&h=$h";
     }
 }
