@@ -121,11 +121,11 @@ class V3Controller extends Controller
     {
         $client = new Client();
 
-        $res = null;
+        $client->setUserAgent($this->userAgents[array_rand($this->userAgents)]);
 
         try {
             $resource = fopen($tempFilePath, 'w');
-            $res = $client->get($url, [
+            $client->get($url, [
                 'sink' => $resource,
             ]);
         } catch (\Exception $e) {
