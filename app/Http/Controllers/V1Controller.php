@@ -22,11 +22,11 @@ class V1Controller extends Controller
 
         $validator = validator($request->all(), [
             'dimension' => 'required|regex:/^\d+x\d+$/',
-            'key'       => 'integer',
+            'key' => 'integer',
         ], [
             'dimension.required' => 'dimension 缺失参数, 如: 300x200',
             'dimension.regex' => 'dimension 格式不正确, 正确格式为图片宽像素 + 小写字母 x + 高, 如: 300x200',
-            'key.integer'        => 'key 应为一个整数',
+            'key.integer' => 'key 应为一个整数',
         ]);
 
         if ($validator->fails()) {
@@ -45,7 +45,7 @@ class V1Controller extends Controller
                 'errMsg' => $this->errorMsg
             ], 500);
         }
-        
+
         return response()->file($file);
     }
 
@@ -53,7 +53,7 @@ class V1Controller extends Controller
     {
         $image = Image::where([
             'dimension' => $this->dimension,
-            'key'       => $this->key,
+            'key' => $this->key,
         ])->first();
 
         $dir = public_path() . '/upload/v1';
@@ -92,8 +92,8 @@ class V1Controller extends Controller
 
             Image::create([
                 'dimension' => $this->dimension,
-                'hash'      => $hash,
-                'key'       => $this->key,
+                'hash' => $hash,
+                'key' => $this->key,
             ]);
         }
 
