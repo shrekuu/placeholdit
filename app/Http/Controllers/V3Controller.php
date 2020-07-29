@@ -20,7 +20,7 @@ class V3Controller extends Controller
     // get image
     public function getImage(Request $request)
     {
-        set_time_limit(1000);
+        // set_time_limit(1000);
 
         $validator = validator($request->all(), [
             'dimension' => 'required|regex:/^\d+x\d+$/',
@@ -41,7 +41,15 @@ class V3Controller extends Controller
         $this->dimension = $request->input('dimension', '300x300');
         $this->key = $request->input('key', 1);
 
-        $file = $this->retrieveFile();
+
+        // todo: 取图片耗时过长, 尝试 redirect 到图片服务器地址
+        // https://placem.at/$category?w=$w&h=$h&random=$key
+        $url = $this->generateRemoteImageUrl();
+        header("Location: $url");
+        return
+
+
+            $file = $this->retrieveFile();
 
         if (!$file) {
             return response($this->errorMsg, 500);
